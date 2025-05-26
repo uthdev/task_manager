@@ -1,5 +1,5 @@
 const request = require('supertest');
-const app = require('../index.js');
+const app = require('../src/index.js');
 
 describe('GET /', () => {
   it('should return API is running', async () => {
