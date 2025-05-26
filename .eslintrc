@@ -6,5 +6,6 @@
   },
   "rules": {
     // Add custom rules here if needed
-  }
+  },
+  "ignorePatterns": ["tests/**/*.js"]
 }
