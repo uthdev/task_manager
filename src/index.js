@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import router from './routes/index.js';
+import { errorHandler } from './middlewares/errorHandler.js';
 
 dotenv.config();
 
@@ -15,5 +16,8 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/v1', router);
+
+// Centralized error handler
+app.use(errorHandler);
 
 export default app;
