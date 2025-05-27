@@ -1,6 +1,6 @@
 'use strict';
-import { Model } from 'sequelize';
-export default (sequelize, DataTypes) => {
+import { Model, DataTypes } from 'sequelize';
+export default (sequelize) => {
   class Task extends Model {
     /**
      * Helper method for defining associations.
@@ -15,10 +15,26 @@ export default (sequelize, DataTypes) => {
     }
   }
   Task.init({
-    title: DataTypes.STRING,
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     description: DataTypes.STRING,
-    status: DataTypes.STRING,
-    userId: DataTypes.INTEGER
+    status: {
+      type: DataTypes.ENUM('pending', 'in-progress', 'completed'),
+      defaultValue: 'pending',
+      allowNull: false
+    },
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'Users',
+        key: 'id'
+      },
+      onUpdate: 'CASCADE',
+      onDelete: 'CASCADE'
+    }
   }, {
     sequelize,
     modelName: 'Task',
