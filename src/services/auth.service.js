@@ -1,5 +1,7 @@
 import bcrypt from 'bcrypt';
-import User  from '../models/user.js';
+import models  from '../models/index.js';
+
+const { User } = models;
 
 export async function registerUser({ name, email, password, role }) {
   // Check if user already exists
