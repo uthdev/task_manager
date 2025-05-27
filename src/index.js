@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import router from './routes/index.js';
+import { errorHandler } from './middlewares/errorHandler.js';
 
 dotenv.config();
 
@@ -16,9 +17,14 @@ app.get('/', (req, res) => {
 
 app.use('/api/v1', router);
 
-app.use((req, res) => {
-  res.status(404).json({ message: 'Resource not found' });
+// Catch-all 404 route
+app.use((req, res, next) => {
+  const error = new Error('Resource not found');
+  error.status = 404;
+  next(error);
 });
 
+// Centralized error handler
+app.use(errorHandler);
 
 export default app;
