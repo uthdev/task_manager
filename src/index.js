@@ -2,7 +2,9 @@ import express from 'express';
 import dotenv from 'dotenv';
 import router from './routes/index.js';
 import { errorHandler } from './middlewares/errorHandler.js';
-import { swaggerUi, swaggerSpec } from './config/swagger.js';
+import { swaggerUi } from './config/swagger.js';
+import fs from 'fs';
+import yaml from 'js-yaml';
 
 dotenv.config();
 
@@ -17,7 +19,12 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/v1', router);
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+// Swagger UI setup
+const swaggerDocument = yaml.load(
+  fs.readFileSync('swagger.yaml', 'utf8')
+);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Catch-all 404 route
 app.use((req, res, next) => {
