@@ -17,6 +17,13 @@ app.get('/', (req, res) => {
 
 app.use('/api/v1', router);
 
+// Catch-all 404 route
+app.use((req, res, next) => {
+  const error = new Error('Resource not found');
+  error.status = 404;
+  next(error);
+});
+
 // Centralized error handler
 app.use(errorHandler);
 

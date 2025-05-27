@@ -1,6 +1,8 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import User  from '../models/user.js';
+import models  from '../models/index.js';
+
+const { User } = models;
 
 export async function registerUser({ name, email, password, role }) {
   // Check if user already exists
