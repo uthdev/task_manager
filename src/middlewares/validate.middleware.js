@@ -6,7 +6,6 @@ const validate =
     const result = schema.safeParse(req[property]);
 
     if (!result.success) {
-      console.log(result.error.format());
       return res.status(400).json({ errors: result.error.format()});
     }
 
