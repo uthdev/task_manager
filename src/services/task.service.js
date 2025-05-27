@@ -14,10 +14,18 @@ export async function createTask(user, data) {
 export async function getTasks(user, query) {
   const { page = 1, limit = 10, status, taskId, userId } = query;
   const where = {};
-  // Only allow user to see their own tasks unless userId is admin (optional, adjust as needed)
-  where.userId = userId || user.id;
+
+  // If admin and userId is supplied, filter by userId; if not supplied, return all tasks
+  if (user.role === 'admin') {
+    if (userId) where.userId = userId;
+  } else {
+    // For regular users, only return their own tasks
+    where.userId = user.id;
+  }
+
   if (status) where.status = status;
   if (taskId) where.id = taskId;
+
   const tasks = await db.Task.findAndCountAll({
     where,
     offset: (page - 1) * limit,
