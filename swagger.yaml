@@ -239,10 +239,6 @@ paths:
           name: taskId
           schema:
             type: integer
-        - in: query
-          name: userId
-          schema:
-            type: integer
       responses:
         '200':
           description: List of tasks
@@ -295,7 +291,7 @@ paths:
           description: Task not found
   /admin/tasks:
     get:
-      summary: Admin: Get all tasks (with filtering)
+      summary: Admin Get all tasks (with filtering)
       tags: [Admin]
       security:
         - bearerAuth: []
@@ -332,7 +328,7 @@ paths:
                 $ref: '#/components/schemas/TaskList'
   /admin/users:
     get:
-      summary: Admin: Get all users (with filtering)
+      summary: Admin Get all users (with filtering)
       tags: [Admin]
       security:
         - bearerAuth: []

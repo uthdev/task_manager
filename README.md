@@ -15,7 +15,7 @@ A Node.js/Express REST API for managing users, authentication, tasks, and report
 
 1. **Clone the repository:**
    ```bash
-   git clone <repo-url>
+   git clone https://github.com/uthdev/task_manager.git
    cd task_manager
    ```
 
@@ -100,11 +100,6 @@ POST /api/v1/tasks
 ## Database Configuration
 - See `.env.example` for required environment variables.
 - Sequelize config is in `src/config/config.js`.
-
-## Running Tests
-```bash
-npm test
-```
 
 ---
 
